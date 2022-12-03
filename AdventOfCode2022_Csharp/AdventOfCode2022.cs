@@ -26,6 +26,7 @@ namespace AdventOfCode2022_Csharp
             Console.WriteLine(string.Format("Day2Part2: {0}", d2p2));
             Console.WriteLine(string.Format("Day3Part1: {0}", d3p1));
             Console.WriteLine(string.Format("Day3Part2: {0}", d3p2));
+            
 
             Console.Read();
         }
