@@ -12,6 +12,7 @@ namespace AdventOfCode2022_Csharp
             var inputDay2 = File.ReadAllLines("Input/input_Day2.txt").ToList();
             var inputDay3 = File.ReadAllLines("Input/input_Day3.txt").ToList();
             var inputDay4 = File.ReadAllLines("Input/input_Day4.txt").ToList();
+            var inputDay5 = File.ReadAllLines("Input/input_Day5.txt").ToList();
 
             var d1p1 = Day1.Day1_p1(inputDay1);
             var d1p2 = Day1.Day1_p2(inputDay1);
@@ -21,7 +22,8 @@ namespace AdventOfCode2022_Csharp
             var d3p2 = Day3.Day3_p2(inputDay3);
             var d4p1 = Day4.Day4_p1(inputDay4);
             var d4p2 = Day4.Day4_p2(inputDay4);
-            Day4.RunTestsDay4();
+            var d5p1 = Day5.Day5_p1(inputDay5);
+            var d5p2 = Day5.Day5_p2(inputDay5);
 
             Console.WriteLine(string.Format("Day1Part1: {0}", d1p1));
             Console.WriteLine(string.Format("Day1Part2: {0}", d1p2));
@@ -31,6 +33,8 @@ namespace AdventOfCode2022_Csharp
             Console.WriteLine(string.Format("Day3Part2: {0}", d3p2));
             Console.WriteLine(string.Format("Day4Part1: {0}", d4p1));
             Console.WriteLine(string.Format("Day4Part2: {0}", d4p2));
+            Console.WriteLine(string.Format("Day5Part1: {0}", d5p1));
+            Console.WriteLine(string.Format("Day5Part2: {0}", d5p2));
 
 
             Console.Read();
