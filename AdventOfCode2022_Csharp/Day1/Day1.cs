@@ -1,30 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.IO;
 using System.Linq;
+using System.Text;
+using AdventOfCode2022_Csharp.Utilities;
 
 namespace AdventOfCode2022_Csharp
 {
-    public static class Day1
+    class Day1 : IDay<int>
     {
-        public  static int Day1_p1(List<String> inputDay1)
-        {
+        List<String> input { get; set; }
 
-            var lstSum = getSumsList(inputDay1);
-            return lstSum.Max();
-            
+        public Day1()
+        {
+            this.input = File.ReadAllLines("Input/input_Day1.txt").ToList();
         }
 
-        public static int Day1_p2(List<String> inputDay1)
+
+        public int Part1()
         {
 
-            var lstSum = getSumsList(inputDay1);
+            var lstSum = getSumsList(input);
+            return lstSum.Max();
+        }
+
+        public int Part2()
+        {
+            var lstSum = getSumsList(input);
 
             var pippo = lstSum.OrderByDescending(x => x).Take(3).Count();
             return lstSum.OrderByDescending(x => x).Take(3).Sum();
-
-
         }
+
+        public void RunTests(bool print) { }
 
         public static List<int> getSumsList(List<String> inputDay1)
         {

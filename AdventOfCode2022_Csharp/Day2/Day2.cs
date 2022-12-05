@@ -2,11 +2,21 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using System.IO;
 
 namespace AdventOfCode2022_Csharp
 {
-    public static class Day2
+    public class Day2 : Utilities.IDay<int>
     {
+        List<String> input { get; set; }
+        bool print { get; set; }
+
+        public Day2()
+        {
+            this.input = File.ReadAllLines("Input/input_Day2.txt").ToList();
+            this.print = false;
+        }
+
         public static Dictionary<string,int> RockPaperScissor { get {
                 return new Dictionary<string, int>
                 {
@@ -22,19 +32,19 @@ namespace AdventOfCode2022_Csharp
 
                 };
             } set { } }
-        public static int Day2_p1(List<String> inputDay2)
+        public  int Part1()
         {
-            return inputDay2.Sum(x => fightResult(x.Split(" ")[0], x.Split(" ")[1],true));
+            return input.Sum(x => fightResult(x.Split(" ")[0], x.Split(" ")[1],true));
 
         }
-        public static int Day2_p2(List<String> inputDay2)
+        public int Part2()
         {
-            return inputDay2.Sum(x => fightResult(x.Split(" ")[0], x.Split(" ")[1], false));
+            return input.Sum(x => fightResult(x.Split(" ")[0], x.Split(" ")[1], false));
 
         }
+        public void RunTests(bool print) { }
 
-
-        public static int fightResult(string f1, string f2, bool part1)
+        public int fightResult(string f1, string f2, bool part1)
         {
             int val = RockPaperScissor.GetValueOrDefault(f2);
             switch (f1)
@@ -44,16 +54,16 @@ namespace AdventOfCode2022_Csharp
                     {
 
                         case "X":
-                            if(part1) Console.WriteLine(string.Format("Rock vs Rock. Draw"));
-                            else      Console.WriteLine(string.Format("Gotta lose to Rock, will pick Scissor. Scissor + Lose = {0} + {1} ", RockPaperScissor.GetValueOrDefault("Scissor"), 0));
+                            if(part1 && print) Console.WriteLine(string.Format("Rock vs Rock. Draw"));
+                            else if(print)     Console.WriteLine(string.Format("Gotta lose to Rock, will pick Scissor. Scissor + Lose = {0} + {1} ", RockPaperScissor.GetValueOrDefault("Scissor"), 0));
                             return part1 ? val + 3 : RockPaperScissor.GetValueOrDefault("Scissor");
                         case "Y":
-                            if (part1) Console.WriteLine(string.Format("Rock vs Paper. I win"));
-                            else Console.WriteLine(string.Format("Need to draw to Rock, will pick Rock. Rock + Draw = {0} + {1} ", RockPaperScissor.GetValueOrDefault("Rock"), 3));
+                            if(part1 && print) Console.WriteLine(string.Format("Rock vs Paper. I win"));
+                            else if (print)    Console.WriteLine(string.Format("Need to draw to Rock, will pick Rock. Rock + Draw = {0} + {1} ", RockPaperScissor.GetValueOrDefault("Rock"), 3));
                             return part1 ? val + 6 : RockPaperScissor.GetValueOrDefault("Rock") + 3;
                         case "Z":
-                            if (part1) Console.WriteLine(string.Format("Rock vs Scissor. I lose"));
-                            else Console.WriteLine(string.Format("Gotta win to Rock, will pick Paper. Paper + win = {0} + {1} ", RockPaperScissor.GetValueOrDefault("Paper"), 6));
+                            if(part1 && print) Console.WriteLine(string.Format("Rock vs Scissor. I lose"));
+                            else if (print)    Console.WriteLine(string.Format("Gotta win to Rock, will pick Paper. Paper + win = {0} + {1} ", RockPaperScissor.GetValueOrDefault("Paper"), 6));
                             return part1 ? val : RockPaperScissor.GetValueOrDefault("Paper") + 6;
                     }
                     break;
@@ -61,16 +71,16 @@ namespace AdventOfCode2022_Csharp
                     switch (f2)
                     {
                         case "X":
-                            if (part1) Console.WriteLine(string.Format("Paper vs Rock. i Lose"));
-                            else Console.WriteLine(string.Format("Gotta lose to Paper so will pick Rock. I Lose. Rock + Lose = {0} + {1} ", RockPaperScissor.GetValueOrDefault("Rock"), 0));
+                            if(part1 && print) Console.WriteLine(string.Format("Paper vs Rock. i Lose"));
+                            else if (print)    Console.WriteLine(string.Format("Gotta lose to Paper so will pick Rock. I Lose. Rock + Lose = {0} + {1} ", RockPaperScissor.GetValueOrDefault("Rock"), 0));
                             return part1 ? val : RockPaperScissor.GetValueOrDefault("Rock");
                         case "Y":
-                            if (part1) Console.WriteLine(string.Format("Paper vs Paper. Draw"));
-                            else Console.WriteLine(string.Format("Gotta draw to Paper, will pick Paper. Paper + Draw = {0} + {1} ", RockPaperScissor.GetValueOrDefault("Paper"), 3));
+                            if(part1 && print) Console.WriteLine(string.Format("Paper vs Paper. Draw"));
+                            else if (print)    Console.WriteLine(string.Format("Gotta draw to Paper, will pick Paper. Paper + Draw = {0} + {1} ", RockPaperScissor.GetValueOrDefault("Paper"), 3));
                             return part1 ? val + 3 : RockPaperScissor.GetValueOrDefault("Paper") + 3;
                         case "Z":
-                            if (part1) Console.WriteLine(string.Format("Paper vs Scissor. i Win"));
-                            else Console.WriteLine(string.Format("Gotta win to Paper, will pick Scissor. Paper + Win = {0} + {1} ", RockPaperScissor.GetValueOrDefault("Scissor"), 6));
+                            if(part1 && print) Console.WriteLine(string.Format("Paper vs Scissor. i Win"));
+                            else if (print) Console.WriteLine(string.Format("Gotta win to Paper, will pick Scissor. Paper + Win = {0} + {1} ", RockPaperScissor.GetValueOrDefault("Scissor"), 6));
                             return part1? val + 6: RockPaperScissor.GetValueOrDefault("Scissor") + 6;
                     }
                     break;
@@ -78,16 +88,16 @@ namespace AdventOfCode2022_Csharp
                     switch (f2)
                     {
                         case "X":
-                            if (part1) Console.WriteLine(string.Format("Scissor vs Rock. i win"));
-                            else Console.WriteLine(string.Format("Gotta lose to Scissor, will pick Paper. Paper + Lose = {0} + {1} ", RockPaperScissor.GetValueOrDefault("Paper"), 0));
+                            if(part1 && print) Console.WriteLine(string.Format("Scissor vs Rock. i win"));
+                            else if (print) Console.WriteLine(string.Format("Gotta lose to Scissor, will pick Paper. Paper + Lose = {0} + {1} ", RockPaperScissor.GetValueOrDefault("Paper"), 0));
                             return part1? val + 6 : RockPaperScissor.GetValueOrDefault("Paper");
                         case "Y":
-                            if (part1) Console.WriteLine(string.Format("Scissor vs Paper. i Lose"));
-                            else Console.WriteLine(string.Format("Gotta draw to Scissor, will pick scissor. Scissor + Draw = {0} + {1} ", RockPaperScissor.GetValueOrDefault("Scissor"), 3));
+                           if(part1 && print) Console.WriteLine(string.Format("Scissor vs Paper. i Lose"));
+                            else if (print) Console.WriteLine(string.Format("Gotta draw to Scissor, will pick scissor. Scissor + Draw = {0} + {1} ", RockPaperScissor.GetValueOrDefault("Scissor"), 3));
                             return part1 ? val : RockPaperScissor.GetValueOrDefault("Scissor") + 3;
                         case "Z":
-                            if (part1) Console.WriteLine(string.Format("Scissor vs Scissor. draw"));
-                            else Console.WriteLine(string.Format("Gotta win to Scissor, will pick Rock. Scissor + win = {0} + {1} ", RockPaperScissor.GetValueOrDefault("Rock"), 6));
+                            if(part1 && print) Console.WriteLine(string.Format("Scissor vs Scissor. draw"));
+                            else if (print) Console.WriteLine(string.Format("Gotta win to Scissor, will pick Rock. Scissor + win = {0} + {1} ", RockPaperScissor.GetValueOrDefault("Rock"), 6));
                             return part1 ? val + 3 : RockPaperScissor.GetValueOrDefault("Rock") + 6;
                     }
                     break;

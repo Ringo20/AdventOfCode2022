@@ -3,11 +3,19 @@ using System.Collections.Generic;
 using System.Text;
 using AdventOfCode2022_Csharp.Utilities;
 using System.Linq;
+using System.IO;
 
 namespace AdventOfCode2022_Csharp
 {
-    public static class Day3
+    public class Day3 : Utilities.IDay<int>
     {
+        List<String> input { get; set; }
+        bool print { get; set; }
+        public Day3()
+        {
+            this.input = File.ReadAllLines("Input/input_Day3.txt").ToList();
+            this.print = false;
+        }
         public static Dictionary<string, int> ItemsValues
         {
             get
@@ -62,10 +70,10 @@ namespace AdventOfCode2022_Csharp
             return sum;
 
         }
-        public static int Day3_p1(List<String> inputDay3)
+        public int Part1()
         {
             int sum = 0;
-            foreach (var item in inputDay3)
+            foreach (var item in input)
             {
                 var backpack1 = item.Substring(0, item.Length / 2);
                 var backpack2 = item.Substring(item.Length / 2, item.Length / 2);
@@ -77,12 +85,12 @@ namespace AdventOfCode2022_Csharp
             return sum;
 
         }
-        public static int Day3_p2(List<String> inputDay3)
+        public int Part2()
         {
             int sum = 0;
-            for (int i = 0; i < inputDay3.Count; i= i+3)
+            for (int i = 0; i < input.Count; i= i+3)
             {
-                var val = (inputDay3[i].Intersect(inputDay3[i + 1])).Intersect(inputDay3[i + 2]).First();
+                var val = (input[i].Intersect(input[i + 1])).Intersect(input[i + 2]).First();
                 sum += char.ToLower(val) - 'a' + (char.ToLower(val) == val ? 1 : 27);
             }
             return sum;
@@ -90,31 +98,29 @@ namespace AdventOfCode2022_Csharp
         }
 
 
-        public static void RunTestsDay3()
+        public void RunTests(bool print)
         {
+            this.input = new List<string>() { "vJrwpWtwJgWrhcsFMMfFFhFp", "jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL", "PmmdzqPrVvPwwTWBwg", "wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn", "ttgJtRGJQctTZtZT", "CrZsJsPPZsGzwwsLwLmpwMDw" };
+            this.print = print;
+
+            if (print) Console.WriteLine("Test Day3:");
             Day3_Part1_Test();
             Day3_Part2_Test();
+            this.print = !print;
+            this.input = File.ReadAllLines("Input/input_Day3.txt").ToList();
 
         }
-        public static void Day3_Part1_Test()
+        public  void Day3_Part1_Test()
         {
 
-            var tests = new List<Tuple<List<string>, int>>
-            {
-                new Tuple<List<string>, int>(new List<string>() { "vJrwpWtwJgWrhcsFMMfFFhFp","jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL","PmmdzqPrVvPwwTWBwg","wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn","ttgJtRGJQctTZtZT","CrZsJsPPZsGzwwsLwLmpwMDw"}, 157),
-            };
+            new List< int>{157}.ForEach(testResult => Helpers.AssertEqual(Part1(), testResult, print));
 
-            tests.ForEach(test => Helpers.AssertEqual(Day3_p1(test.Item1), test.Item2,true));
         }
-        public static void Day3_Part2_Test()
+        public void Day3_Part2_Test()
         {
 
-            var tests = new List<Tuple<List<string>, int>>
-            {
-                new Tuple<List<string>, int>(new List<string>() { "vJrwpWtwJgWrhcsFMMfFFhFp","jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL","PmmdzqPrVvPwwTWBwg","wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn","ttgJtRGJQctTZtZT","CrZsJsPPZsGzwwsLwLmpwMDw"}, 70),
-            };
-
-            tests.ForEach(test => Helpers.AssertEqual(Day3_p2(test.Item1), test.Item2, true));
+            new List<int> {70}.ForEach(testResult => Helpers.AssertEqual(Part2(), testResult, print));
+            
         }
 
     }

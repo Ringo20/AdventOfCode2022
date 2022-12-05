@@ -2,22 +2,30 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using AdventOfCode2022_Csharp.Utilities;
+using System.IO;
 
 namespace AdventOfCode2022_Csharp
 {
-    public static class Day5
+    public class Day5 : Utilities.IDay<string>
     {
 
-        public static List<List<String>> stacks;
-        public static bool isTest = false;
-
-        public static string Day5_p1(List<String> inputDay5)
+        public List<List<String>> stacks;
+        public bool isTest = false;
+        List<String> input { get; set; }
+        bool print { get; set; }
+        public Day5()
+        {
+            this.input = File.ReadAllLines("Input/input_Day5.txt").ToList();
+            this.print = false;
+        }
+        public string Part1()
         {
             string res = "";
             List<int> move;
             stacks = buildStack();
 
-            inputDay5.ForEach(x =>
+            input.ForEach(x =>
             {
                 move = getMove(x);
                 stacks[move[2]].AddRange(stacks[move[1]].TakeLast(move[0]).Reverse());
@@ -33,13 +41,13 @@ namespace AdventOfCode2022_Csharp
 
         }
 
-        public static string Day5_p2(List<String> inputDay5)
+        public string Part2()
         {
             string res = "";
             List<int> move;
             stacks = buildStack();
 
-            inputDay5.ForEach(x =>
+            input.ForEach(x =>
             {
                 move = getMove(x);
                 stacks[move[2]].AddRange(stacks[move[1]].TakeLast(move[0]));
@@ -56,7 +64,7 @@ namespace AdventOfCode2022_Csharp
         }
 
 
-        public static List<List<String>> buildStack()
+        public List<List<String>> buildStack()
         {
             List<List<String>> stacks;
             if (!isTest)
@@ -89,7 +97,7 @@ namespace AdventOfCode2022_Csharp
             return stacks;
         }
 
-        public static List<String> getTestMoves()
+        public List<String> getTestMoves()
         {
             List<String> moves = new List<String>()
             {
@@ -102,7 +110,7 @@ namespace AdventOfCode2022_Csharp
             return moves;
         }
 
-        public static List<int> getMove(String stringMove)
+        public List<int> getMove(String stringMove)
         {
             List<int> move = new List<int>();
             //move 5 from 4 to 9
@@ -112,21 +120,25 @@ namespace AdventOfCode2022_Csharp
             return move;
         }
 
-        public static void RunTestsDay5()
+        public void RunTests(bool print)
         {
-            Day5_Part2_Test();
+            this.input = getTestMoves();
+            this.print = print;
 
-        }
-        public static void Day5_Part2_Test()
-        {
-
-            var tests = new List<Tuple<List<string>, string>>
-            {
-                new Tuple<List<string>, string>(getTestMoves(), "MCD"),
-            };
             isTest = true;
-            tests.ForEach(test => Utilities.Helpers.AssertEqual(Day5_p2(test.Item1), test.Item2, true));
+            if (print) Console.WriteLine("Test Day5:");
+            Day5_Part2_Test();
             isTest = false;
+            this.input = File.ReadAllLines("Input/input_Day5.txt").ToList();
+
         }
+        public void Day5_Part2_Test()
+        {
+
+            new List<string> { "MCD" }.ForEach(testResult => Helpers.AssertEqual(Part2(), testResult, print));
+            
+        }
+
+   
     }
 }
