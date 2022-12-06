@@ -13,7 +13,7 @@ namespace AdventOfCode2022_Csharp
         bool print { get; set; }
         public Day4()
         {
-            this.input = File.ReadAllLines("Input/input_Day4.txt").ToList();
+            this.input = Utilities.Helpers.GetInputList(4);
             this.print = false;
         }
         public  int Part1()
@@ -80,7 +80,7 @@ namespace AdventOfCode2022_Csharp
             Day4_Part1_Test();
             Day4_Part2_Test();
             this.print = !print;
-            this.input = File.ReadAllLines("Input/input_Day4.txt").ToList();
+            this.input = Utilities.Helpers.GetInputList(4);
 
         }
         public void Day4_Part1_Test()

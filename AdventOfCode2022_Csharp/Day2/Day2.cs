@@ -13,7 +13,7 @@ namespace AdventOfCode2022_Csharp
 
         public Day2()
         {
-            this.input = File.ReadAllLines("Input/input_Day2.txt").ToList();
+            this.input = Utilities.Helpers.GetInputList(2);
             this.print = false;
         }
 

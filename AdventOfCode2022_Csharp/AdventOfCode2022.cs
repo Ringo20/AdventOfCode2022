@@ -11,7 +11,7 @@ namespace AdventOfCode2022_Csharp
         static void Main(string[] args)
         {
 
-            List<string> daysToRun = new List<string>(){ "1" ,"2","3","4","5"};
+            List<string> daysToRun = new List<string>(){ "1" ,"2","3","4","5","6"};
 
             foreach (var day in daysToRun)
             {

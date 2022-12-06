@@ -13,7 +13,7 @@ namespace AdventOfCode2022_Csharp
         bool print { get; set; }
         public Day3()
         {
-            this.input = File.ReadAllLines("Input/input_Day3.txt").ToList();
+            this.input = Utilities.Helpers.GetInputList(3);
             this.print = false;
         }
         public static Dictionary<string, int> ItemsValues
@@ -107,7 +107,7 @@ namespace AdventOfCode2022_Csharp
             Day3_Part1_Test();
             Day3_Part2_Test();
             this.print = !print;
-            this.input = File.ReadAllLines("Input/input_Day3.txt").ToList();
+            this.input = Utilities.Helpers.GetInputList(3);
 
         }
         public  void Day3_Part1_Test()
