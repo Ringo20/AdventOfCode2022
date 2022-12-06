@@ -42,7 +42,7 @@ namespace AdventOfCode2022_Csharp
             return input.Sum(x => fightResult(x.Split(" ")[0], x.Split(" ")[1], false));
 
         }
-        public void RunTests(bool print) { }
+        public void TestsSetup(bool print) { }
 
         public int fightResult(string f1, string f2, bool part1)
         {

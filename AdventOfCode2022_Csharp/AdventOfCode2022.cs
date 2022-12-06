@@ -11,7 +11,7 @@ namespace AdventOfCode2022_Csharp
         static void Main(string[] args)
         {
 
-            List<string> daysToRun = new List<string>(){ "1" ,"2","3","4","5","6"};
+            List<string> daysToRun = new List<string>(){"1","2", "3", "4", "5", "6" };
 
             foreach (var day in daysToRun)
             {
@@ -20,7 +20,7 @@ namespace AdventOfCode2022_Csharp
                 var dayClass = Activator.CreateInstance(dayType);
                 dynamic dynamicDayClass = dayClass;
 
-                dynamicDayClass.RunTests(true);
+                dynamicDayClass.TestsSetup(true);
                 Console.WriteLine(string.Format("Day{0} Part1: {1}", day, dynamicDayClass.Part1()));
                 Console.WriteLine(string.Format("Day{0} Part2: {1}", day, dynamicDayClass.Part2()));
                 

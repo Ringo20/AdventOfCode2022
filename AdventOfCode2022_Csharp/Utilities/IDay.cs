@@ -9,8 +9,10 @@ namespace AdventOfCode2022_Csharp.Utilities
          T Part1 ();
          T Part2();
 
-        void RunTests(bool print);
+        void TestsSetup(bool print);
         
+
+
 
     }
 }

@@ -7,13 +7,13 @@ using AdventOfCode2022_Csharp.Utilities;
 
 namespace AdventOfCode2022_Csharp
 {
-    class Day1 : IDay<int>
+    class Day1 : Day, IDay<int>
     {
-        List<String> input { get; set; }
+        public List<String> input { get; set; }
+        
 
         public Day1()
         {
-            //this.input = File.ReadAllLines("Input/input_Day1.txt").ToList();
             this.input = Helpers.GetInputList(1);
         }
 
@@ -21,19 +21,16 @@ namespace AdventOfCode2022_Csharp
         public int Part1()
         {
 
-            var lstSum = getSumsList(input);
-            return lstSum.Max();
+            return getSumsList(input).Max();
         }
 
         public int Part2()
         {
-            var lstSum = getSumsList(input);
-
-            var pippo = lstSum.OrderByDescending(x => x).Take(3).Count();
-            return lstSum.OrderByDescending(x => x).Take(3).Sum();
+            return getSumsList(input).OrderByDescending(x => x).Take(3).Sum();
+            
         }
 
-        public void RunTests(bool print) { }
+        public void TestsSetup(bool print) { }
 
         public static List<int> getSumsList(List<String> inputDay1)
         {

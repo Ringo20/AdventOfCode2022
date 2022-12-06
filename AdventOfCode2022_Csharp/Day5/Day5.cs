@@ -120,7 +120,7 @@ namespace AdventOfCode2022_Csharp
             return move;
         }
 
-        public void RunTests(bool print)
+        public void TestsSetup(bool print)
         {
             this.input = getTestMoves();
             this.print = print;

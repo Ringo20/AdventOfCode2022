@@ -7,14 +7,15 @@ using System.IO;
 
 namespace AdventOfCode2022_Csharp
 {
-    public class Day3 : Utilities.IDay<int>
+    public class Day3 : Day, Utilities.IDay<int>
     {
-        List<String> input { get; set; }
-        bool print { get; set; }
+        public List<String> input { get; set; }
+        public bool print { get; set; }
+        public Dictionary<List<string>, List<int>> testInput;
         public Day3()
         {
             this.input = Utilities.Helpers.GetInputList(3);
-            this.print = false;
+            this.print = true;
         }
         public static Dictionary<string, int> ItemsValues
         {
@@ -98,30 +99,22 @@ namespace AdventOfCode2022_Csharp
         }
 
 
-        public void RunTests(bool print)
+        public void TestsSetup(bool print)
         {
-            this.input = new List<string>() { "vJrwpWtwJgWrhcsFMMfFFhFp", "jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL", "PmmdzqPrVvPwwTWBwg", "wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn", "ttgJtRGJQctTZtZT", "CrZsJsPPZsGzwwsLwLmpwMDw" };
-            this.print = print;
+            this.testInput = new Dictionary<List<string>, List<int>>()
+            {
+                {
+                    new List<string>() { "vJrwpWtwJgWrhcsFMMfFFhFp", "jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL", "PmmdzqPrVvPwwTWBwg", "wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn", "ttgJtRGJQctTZtZT", "CrZsJsPPZsGzwwsLwLmpwMDw" } 
+                    ,new List<int>(){ 157,70}
+                }
+            };
 
             if (print) Console.WriteLine("Test Day3:");
-            Day3_Part1_Test();
-            Day3_Part2_Test();
-            this.print = !print;
+            this.RunTests(this, print);
             this.input = Utilities.Helpers.GetInputList(3);
 
         }
-        public  void Day3_Part1_Test()
-        {
-
-            new List< int>{157}.ForEach(testResult => Helpers.AssertEqual(Part1(), testResult, print));
-
-        }
-        public void Day3_Part2_Test()
-        {
-
-            new List<int> {70}.ForEach(testResult => Helpers.AssertEqual(Part2(), testResult, print));
-            
-        }
+  
 
     }
 }

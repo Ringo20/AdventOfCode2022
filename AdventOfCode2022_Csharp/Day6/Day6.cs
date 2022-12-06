@@ -7,10 +7,12 @@ using System.Text;
 
 namespace AdventOfCode2022_Csharp
 {
-    class Day6 : IDay<int>
+    class Day6 : Day, IDay<int> 
     {
-        List<String> input { get; set; }
-        bool print { get; set; }
+        public List<String> input { get; set; }
+
+        public Dictionary<List<string>, List<int>> testInput { get; set; } 
+        public bool print { get; set; }
         public Day6()
         {
             this.input = Utilities.Helpers.GetInputList(6);
@@ -51,26 +53,21 @@ namespace AdventOfCode2022_Csharp
             return 0;
         }
 
-        public void RunTests(bool print)
+        public void TestsSetup(bool print)
         {
-            this.print = print;
-            this.input = new List<string>() { "mjqjpqmgbljsphdztnvjfqwrcgsmlb" };
+            this.testInput = new Dictionary<List<string>, List<int>>()
+            {
+                {new List<string>(){ "mjqjpqmgbljsphdztnvjfqwrcgsmlb" }, new List<int>(){7, 19} },
+                {new List<string>(){ "bvwbjplbgvbhsrlpgdmjqwftvncz"},new List<int> {5,23} },
+                {new List<string>(){ "nppdvjthqldpwncqszvftbrmjlhg"},new List<int> {6,23} },
+                {new List<string>(){ "nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg"},new List<int> {10,29} },
+                {new List<string>(){ "zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw"},new List<int> {11,26} },
+            };
+
             if (print) Console.WriteLine("Test Day6:");
-            Day6_Part1_Test();
-            Day6_Part2_Test();
+            this.RunTests(this, print);
             this.input = Utilities.Helpers.GetInputList(6);
         }
 
-        private void Day6_Part1_Test()
-        {
-
-            new List<int> {7}.ForEach(testResult => Helpers.AssertEqual(Part1(), testResult, print));
-        }
-
-        private void Day6_Part2_Test()
-        {
-
-            new List<int> { 19 }.ForEach(testResult => Helpers.AssertEqual(Part2(), testResult, print));
-        }
     }
 }

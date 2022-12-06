@@ -7,10 +7,11 @@ using System.IO;
 
 namespace AdventOfCode2022_Csharp
 {
-    public class Day4 : Utilities.IDay<int>
+    public class Day4 : Day, Utilities.IDay<int>
     {
-        List<String> input { get; set; }
-        bool print { get; set; }
+        public List<String> input { get; set; }
+        public Dictionary<List<string>, List<int>> testInput { get; set; }
+        public bool print { get; set; }
         public Day4()
         {
             this.input = Utilities.Helpers.GetInputList(4);
@@ -65,32 +66,26 @@ namespace AdventOfCode2022_Csharp
 
         }
 
-        public void RunTests(bool print)
+        public void TestsSetup(bool print)
         {
-            this.input = new List<string>() {
+            this.testInput = new Dictionary<List<string>, List<int>>()
+            {
+                {
+                    new List<string>() {
                     "2-4,6-8",
                     "2-3,4-5",
                     "5-7,7-9",
                     "2-8,3-7",
                     "6-6,4-6",
                     "2-6,4-8",
-                };
-            this.print = print;
+                    } , new List<int>(){2,4}
+                }
+            };
             if (print) Console.WriteLine("Test Day4:");
-            Day4_Part1_Test();
-            Day4_Part2_Test();
-            this.print = !print;
+            this.RunTests(this, print);
             this.input = Utilities.Helpers.GetInputList(4);
 
         }
-        public void Day4_Part1_Test()
-        {
 
-            new List<int> { 2 }.ForEach(testResult => Helpers.AssertEqual(Part1(), testResult, print));
-        }
-        public void Day4_Part2_Test()
-        {
-            new List<int> { 4 }.ForEach(testResult => Helpers.AssertEqual(Part2(), testResult, print));
-        }
     }
 }
